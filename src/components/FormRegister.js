@@ -12,6 +12,16 @@ function FormRegister() {
         onSubmit: (values) => {
             console.log(values);
         },
+        validate: (values) => {
+            let error = {};
+            if (!values.name) {
+                error.name = "Name is required";
+            }
+            if (!values.motivation) {
+                error.motivation = "Motivation is required";
+            }
+            return error;
+        },
     });
     return (
         <div className="container-form">
@@ -27,8 +37,13 @@ function FormRegister() {
                         className="input"
                         value={formik.values.name}
                         onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
                     />
-                    {/* <span className="input-error">Error</span> */}
+                    {formik.errors.name && formik.touched.name ? (
+                        <span className="input-error">
+                            {formik.errors.name}
+                        </span>
+                    ) : null}
                 </div>
                 <div className="form-group">
                     <label htmlFor="email">Email</label>
@@ -41,7 +56,6 @@ function FormRegister() {
                         value={formik.values.email}
                         onChange={formik.handleChange}
                     />
-                    {/* <span className="input-error">Error</span> */}
                 </div>
                 <div className="form-group">
                     <label htmlFor="motivation">Motivation</label>
@@ -54,8 +68,13 @@ function FormRegister() {
                         className="input"
                         value={formik.values.motivation}
                         onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
                     ></textarea>
-                    {/* <span className="input-error">Error</span> */}
+                    {formik.errors.motivation && formik.touched.motivation ? (
+                        <span className="input-error">
+                            {formik.errors.motivation}
+                        </span>
+                    ) : null}
                 </div>
                 <button type="submit" className="btn">
                     Register
