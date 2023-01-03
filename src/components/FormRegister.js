@@ -10,6 +10,7 @@ function FormRegister() {
         gender: "",
         handphone: [""],
         classRoom: "",
+        masteredLanguages: [],
     };
 
     const onSubmit = (values) => {
@@ -32,8 +33,11 @@ function FormRegister() {
             .required("Motivation is required")
             .min(25, "Motivation must be longer than 25 characters")
             .trim(),
-        gender: yup.string().required("Gender is required").trim(),
-        classRoom: yup.string().required("Class Room is required").trim(),
+        gender: yup.string().required("Gender is required"),
+        classRoom: yup.string().required("Class Room is required"),
+        masteredLanguages: yup
+            .array()
+            .min(1, "Mastered Languages must be than 1 Items"),
     });
 
     return (
@@ -148,27 +152,68 @@ function FormRegister() {
                         </ErrorMessage>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="classRoom">
+                        <label htmlFor="gender">Class Room</label>
+                        <label htmlFor="ReactJS">
                             <Field
                                 name="classRoom"
-                                id="classRoom"
+                                id="ReactJS"
                                 className="input"
                                 value="ReactJS"
                                 type="radio"
                             />
-                            Class Room
+                            React JS
                         </label>
-                        <label htmlFor="classRoom">
+                        <label htmlFor="VueJS">
                             <Field
                                 type="radio"
                                 name="classRoom"
-                                id="classRoom"
+                                id="VueJS"
                                 className="input"
                                 value="VueJS"
                             />
-                            Class Room
+                            Vue JS
                         </label>
                         <ErrorMessage name="classRoom">
+                            {(error) => (
+                                <span className="input-error">{error}</span>
+                            )}
+                        </ErrorMessage>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="masteredLanguages">
+                            Mastered Languages
+                        </label>
+                        <label htmlFor="Java">
+                            <Field
+                                name="masteredLanguages"
+                                id="Java"
+                                className="input"
+                                value="Java"
+                                type="checkbox"
+                            />
+                            Java
+                        </label>
+                        <label htmlFor="PHP">
+                            <Field
+                                type="checkbox"
+                                name="masteredLanguages"
+                                id="PHP"
+                                className="input"
+                                value="PHP"
+                            />
+                            PHP
+                        </label>
+                        <label htmlFor="Python">
+                            <Field
+                                type="checkbox"
+                                name="masteredLanguages"
+                                id="Python"
+                                className="input"
+                                value="Python"
+                            />
+                            Python
+                        </label>
+                        <ErrorMessage name="masteredLanguages">
                             {(error) => (
                                 <span className="input-error">{error}</span>
                             )}
