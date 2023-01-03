@@ -1,5 +1,6 @@
 import React from "react";
 import { useFormik } from "formik";
+import * as yup from "yup";
 
 function FormRegister() {
     const initialValues = {
@@ -12,16 +13,23 @@ function FormRegister() {
         onSubmit: (values) => {
             console.log(values);
         },
-        validate: (values) => {
-            let error = {};
-            if (!values.name) {
-                error.name = "Name is required";
-            }
-            if (!values.motivation) {
-                error.motivation = "Motivation is required";
-            }
-            return error;
-        },
+        validationSchema: yup.object({
+            name: yup
+                .string()
+                .required("Name is required")
+                .min(5, "Name must be longer than 5 characters")
+                .trim(),
+            email: yup
+                .string()
+                .required("Email is required")
+                .email("Enter e-mail format")
+                .trim(),
+            motivation: yup
+                .string()
+                .required("Motivation is required")
+                .min("Motivation must be longer than 25 characters")
+                .trim(),
+        }),
     });
     return (
         <div className="container-form">
@@ -55,7 +63,13 @@ function FormRegister() {
                         className="input"
                         value={formik.values.email}
                         onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
                     />
+                    {formik.errors.motivation && formik.touched.email ? (
+                        <span className="input-error">
+                            {formik.errors.email}
+                        </span>
+                    ) : null}
                 </div>
                 <div className="form-group">
                     <label htmlFor="motivation">Motivation</label>
