@@ -7,6 +7,7 @@ function FormRegister() {
         name: "",
         email: "",
         motivation: "",
+        gender: "",
         handphone: [""],
     };
 
@@ -30,6 +31,7 @@ function FormRegister() {
             .required("Motivation is required")
             .min(25, "Motivation must be longer than 25 characters")
             .trim(),
+        gender: yup.string().required("Gender is required").trim(),
     });
 
     return (
@@ -120,6 +122,24 @@ function FormRegister() {
                             className="input"
                         />
                         <ErrorMessage name="motivation">
+                            {(error) => (
+                                <span className="input-error">{error}</span>
+                            )}
+                        </ErrorMessage>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="gender">Gender</label>
+                        <Field
+                            as="select"
+                            name="gender"
+                            id="gender"
+                            className="input"
+                        >
+                            <option value="">-- Select Gender --</option>
+                            <option value="Pria">Pria</option>
+                            <option value="Wanita">Wanita</option>
+                        </Field>
+                        <ErrorMessage name="gender">
                             {(error) => (
                                 <span className="input-error">{error}</span>
                             )}
