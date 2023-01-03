@@ -9,6 +9,7 @@ function FormRegister() {
         motivation: "",
         gender: "",
         handphone: [""],
+        classRoom: "",
     };
 
     const onSubmit = (values) => {
@@ -32,6 +33,7 @@ function FormRegister() {
             .min(25, "Motivation must be longer than 25 characters")
             .trim(),
         gender: yup.string().required("Gender is required").trim(),
+        classRoom: yup.string().required("Class Room is required").trim(),
     });
 
     return (
@@ -140,6 +142,33 @@ function FormRegister() {
                             <option value="Wanita">Wanita</option>
                         </Field>
                         <ErrorMessage name="gender">
+                            {(error) => (
+                                <span className="input-error">{error}</span>
+                            )}
+                        </ErrorMessage>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="classRoom">
+                            <Field
+                                name="classRoom"
+                                id="classRoom"
+                                className="input"
+                                value="ReactJS"
+                                type="radio"
+                            />
+                            Class Room
+                        </label>
+                        <label htmlFor="classRoom">
+                            <Field
+                                type="radio"
+                                name="classRoom"
+                                id="classRoom"
+                                className="input"
+                                value="VueJS"
+                            />
+                            Class Room
+                        </label>
+                        <ErrorMessage name="classRoom">
                             {(error) => (
                                 <span className="input-error">{error}</span>
                             )}
