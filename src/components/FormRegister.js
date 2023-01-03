@@ -1,5 +1,5 @@
 import React from "react";
-import { Field, Form, Formik, ErrorMessage } from "formik";
+import { Field, Form, Formik, ErrorMessage, FieldArray } from "formik";
 import * as yup from "yup";
 
 function FormRegister() {
@@ -7,6 +7,7 @@ function FormRegister() {
         name: "",
         email: "",
         motivation: "",
+        handphone: [""],
     };
 
     const onSubmit = (values) => {
@@ -69,6 +70,43 @@ function FormRegister() {
                                 <span className="input-error">{error}</span>
                             )}
                         </ErrorMessage>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="handphone">Phone Number</label>
+                        <FieldArray name="handphone">
+                            {(props) => {
+                                const { form, push, remove } = props;
+                                const { values } = form;
+                                const { handphone } = values;
+
+                                return handphone.map((number, i) => {
+                                    return (
+                                        <div key={i}>
+                                            <Field
+                                                name={`handphone[${i}]`}
+                                                className="input"
+                                            />
+                                            <button
+                                                type="button"
+                                                style={{ padding: ".3rem" }}
+                                                onClick={() => push("")}
+                                            >
+                                                +
+                                            </button>
+                                            {i > 0 && (
+                                                <button
+                                                    type="button"
+                                                    style={{ padding: ".3rem" }}
+                                                    onClick={() => remove()}
+                                                >
+                                                    -
+                                                </button>
+                                            )}
+                                        </div>
+                                    );
+                                });
+                            }}
+                        </FieldArray>
                     </div>
                     <div className="form-group">
                         <label htmlFor="motivation">Motivation</label>
