@@ -145,11 +145,6 @@ function FormRegister() {
                             <option value="Pria">Pria</option>
                             <option value="Wanita">Wanita</option>
                         </Field>
-                        <ErrorMessage name="gender">
-                            {(error) => (
-                                <span className="input-error">{error}</span>
-                            )}
-                        </ErrorMessage>
                     </div>
                     <div className="form-group">
                         <label htmlFor="gender">Class Room</label>
