@@ -151,6 +151,7 @@ function FormRegister() {
                             )}
                         </ErrorMessage>
                     </div>
+                    a
                     <div className="form-group">
                         <label htmlFor="gender">Class Room</label>
                         <label htmlFor="ReactJS">
